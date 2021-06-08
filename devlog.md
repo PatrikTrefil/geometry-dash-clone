@@ -2,9 +2,24 @@
 
 This file is for notes about the development, almost like a diary.
 
-# Log
+## To-Do
 
-## 2021-06-07
+- figure out how to save and load maps (includes structure of classes for building blocks)
+- add start screen
+
+### Potentional additions
+
+- music
+- rolling ball form
+
+## Log
+
+### 2021-06-08
+
+- rotation while jumping
+- increase fall speed
+
+### 2021-06-07
 
 - setup of unity
 - setup of git
