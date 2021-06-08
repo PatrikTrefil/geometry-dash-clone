@@ -1,11 +1,24 @@
 # DevLog
 
+## Notes
+
+- FixedUdpate is for physics (updated per physics change)
+- Update is for user input (updated every frame)
 This file is for notes about the development, almost like a diary.
+
+Finish
+
+create a sprite
+2dcollider with trigger
+-> move to the right side of the camera view
+
+Start Screen
+
+https://www.youtube.com/watch?v=zc8ac_qUXQY
 
 ## To-Do
 
 - figure out how to save and load maps (includes structure of classes for building blocks)
-- add start screen
 
 ### Potentional additions
 
@@ -18,6 +31,8 @@ This file is for notes about the development, almost like a diary.
 
 - rotation while jumping
 - increase fall speed
+- start screen
+- decided not to do rotations, too complicated
 
 ### 2021-06-07
 

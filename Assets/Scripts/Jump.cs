@@ -6,10 +6,11 @@ public class Jump : MonoBehaviour
 {
     public Vector2 jumpForce;
     public float speed;
-    private bool isGrounded = false;
     public float rotationSpeed;
     public float fallMultiplier;
     private Rigidbody2D rb;
+    private bool isGrounded = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,35 +18,42 @@ public class Jump : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.name == "Ground")
+        if (collision.gameObject.tag == "Block")
         {
             isGrounded = true;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
+
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Ground")
+        if (collision.gameObject.tag == "Block")
+        {
             isGrounded = false;
+        }
     }
 
     void MakeJump()
     {
+        rb.AddForce(jumpForce, ForceMode2D.Impulse);
+    }
+
+    void JumpDetection()
+    {
         if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-            rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            MakeJump();
     }
 
     void Movement()
     {
-        transform.Translate(Vector2.right * Time.deltaTime * speed, Space.World);
+        //transform.Translate(Vector2.right * Time.deltaTime * speed, Space.World);
+        //rb.MovePosition((Vector2)transform.position + (Vector2.right * speed * Time.deltaTime));
+        rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
     }
 
     void Rotation()
     {
         Vector3 direction = new Vector3(0, 0, 1);
-        Debug.Log(Time.deltaTime);
         transform.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
     }
 
@@ -60,12 +68,15 @@ public class Jump : MonoBehaviour
 
     void Update()
     {
+        JumpDetection();
+    }
+
+    private void FixedUpdate()
+    {
         if (!isGrounded)
         {
-            Rotation();
             IncreaseFallSpeed();
         }
-        MakeJump();
         Movement();
     }
 }

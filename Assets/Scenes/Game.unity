@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: {x: 0, y: 600}
-  speed: 4
+  speed: 100
   rotationSpeed: 100
   fallMultiplier: 2
 --- !u!1 &519420028
