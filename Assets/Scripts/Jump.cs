@@ -9,11 +9,13 @@ public class Jump : MonoBehaviour
     public float rotationSpeed;
     public float fallMultiplier;
     private Rigidbody2D rb;
+    private Transform skin;
     private bool isGrounded = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        skin = GetComponentInChildren<Transform>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -21,8 +23,8 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             isGrounded = true;
+            Debug.Log("landed");
         }
-
     }
 
     void OnCollisionExit2D(Collision2D collision)
@@ -30,6 +32,7 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             isGrounded = false;
+            Debug.Log("airborn");
         }
     }
 
@@ -51,10 +54,19 @@ public class Jump : MonoBehaviour
         rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
     }
 
-    void Rotation()
+    void ContinuousRotation()
     {
         Vector3 direction = new Vector3(0, 0, 1);
-        transform.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
+        skin.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
+    }
+
+    void FinishRotation()
+    {
+        float rem = skin.transform.position.z % 90;
+        if (rem > 45)
+            skin.transform.position += (90 - rem) * Vector3.forward;
+        else
+            skin.transform.position -= rem * Vector3.forward;
     }
 
     void IncreaseFallSpeed()
@@ -76,6 +88,7 @@ public class Jump : MonoBehaviour
         if (!isGrounded)
         {
             IncreaseFallSpeed();
+            ContinuousRotation();
         }
         Movement();
     }
