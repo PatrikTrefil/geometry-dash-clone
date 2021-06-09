@@ -33,6 +33,9 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 - increase fall speed
 - start screen
 - decided not to do rotations, too complicated
+- decided to do rotation animations
+- added start screen
+- fixed movement
 
 ### 2021-06-07
 
