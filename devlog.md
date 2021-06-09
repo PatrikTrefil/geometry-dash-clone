@@ -27,6 +27,11 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 
 ## Log
 
+### 2021-06-09
+
+- setup github actions GameCI
+- added pause menu
+
 ### 2021-06-08
 
 - rotation while jumping
