@@ -14,10 +14,10 @@ jobs:
           lfs: true
 
       # Cache
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library
+#       - uses: actions/cache@v2
+#         with:
+#           path: Library
+#           key: Library
 
       # Test
       - name: Run tests
