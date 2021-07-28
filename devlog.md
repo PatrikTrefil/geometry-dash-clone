@@ -19,6 +19,7 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 ## To-Do
 
 - figure out how to save and load maps (includes structure of classes for building blocks)
+- add desktop icon
 
 ### Potentional additions
 
@@ -26,6 +27,11 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 - rolling ball form
 
 ## Log
+
+### 2021-07-28
+
+- rounded corners on buttons
+- audio
 
 ### 2021-06-09
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             isGrounded = true;
+            FinishRotation();
             Debug.Log("landed");
         }
     }
@@ -62,11 +64,13 @@ public class Jump : MonoBehaviour
 
     void FinishRotation()
     {
-        float rem = skin.transform.position.z % 90;
+        Debug.Log(skin.transform.rotation.z); // ??
+        float rem = Math.Abs(skin.transform.rotation.z) % 90; // HACK abs
+        //Debug.Log(rem);
         if (rem > 45)
-            skin.transform.position += (90 - rem) * Vector3.forward;
+            skin.Rotate(new Vector3(0, 0, 1) * (90 - rem), Space.Self);
         else
-            skin.transform.position -= rem * Vector3.forward;
+            skin.Rotate(-1 * rem * new Vector3(0, 0, 1), Space.Self);
     }
 
     void IncreaseFallSpeed()
