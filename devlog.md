@@ -28,6 +28,10 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 
 ## Log
 
+### 2021-08-11
+
+- extended readme, setup github wiki
+
 ### 2021-07-28
 
 - rounded corners on buttons
