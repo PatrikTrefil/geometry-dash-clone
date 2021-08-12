@@ -20,4 +20,4 @@ The simplest way to play is to download the current build from the Github pipeli
 
 Other alternatives are described in the [User guide section of the wiki](https://github.com/PatrikTrefil/geometry-dash-clone/wiki/User-guide).
 
-**More information about this project can be found in the [Github wiki](https://github.com/PatrikTrefil/geometry-dash-clone/wiki).
+**More information about this project can be found in the [Github wiki](https://github.com/PatrikTrefil/geometry-dash-clone/wiki).**
