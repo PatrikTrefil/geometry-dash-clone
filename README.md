@@ -3,7 +3,9 @@
 
 # Geometry Dash clone
 
-This is a simple clone of [Geometry Dash](https://store.steampowered.com/app/322170/Geometry_Dash/) in Unity.
+This is a simple clone of [Geometry Dash](https://store.steampowered.com/app/322170/Geometry_Dash/)
+in Unity. This clone does not try to clone Geometry Dash design and aesthetics, but focuses only
+on the gameplay.
 
 ## Screenshots
 
