@@ -7,6 +7,11 @@ using UnityEngine.SceneManagement;
 public class Kill : MonoBehaviour
 {
     [SerializeField] private float RayLength;
+    [SerializeField] private AudioSource soundtrack;
+    [SerializeField] private GameObject restartMenu;
+    AudioSource audioSource;
+    [SerializeField] private AudioClip clip;
+    bool isDead = false;
 
     float RayPositionOffset;
     Vector3 RayPositionCenterVertical;
@@ -25,16 +30,25 @@ public class Kill : MonoBehaviour
     RaycastHit2D[] WallHitsHigh;
 
     RaycastHit2D[][] AllRaycastHits = new RaycastHit2D[6][];
+    Animator animator;
+    BoxCollider2D collider;
     // Start is called before the first frame update
     void Start()
     {
-        RayPositionOffset = (transform.localScale.y / 2) - 0.2f;
+        collider = GetComponent<BoxCollider2D>();
+        RayPositionOffset = (collider.size.y / 2) - 0.2f;
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Death()
     {
-        // restart scene
-        SceneManager.LoadScene("Game");
+        isDead = true;
+        animator.Play("Death");
+        soundtrack.mute = true;
+        audioSource.PlayOneShot(clip);
+        restartMenu.SetActive(true);
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     bool shouldDie(RaycastHit2D[][] AllRaycastHits)
@@ -50,13 +64,13 @@ public class Kill : MonoBehaviour
     void DeathControl()
     {
         // Calculate ray starting points
-        RayPositionCenterVertical = transform.position + new Vector3(0, transform.localScale.y / 2, 0);
-        RayPositionLeftVertical = transform.position + new Vector3(-RayPositionOffset, transform.localScale.y / 2, 0);
-        RayPositionRightVertical = transform.position + new Vector3(RayPositionOffset, transform.localScale.y / 2, 0);
+        RayPositionCenterVertical = transform.position + new Vector3(0, collider.size.y / 2, 0);
+        RayPositionLeftVertical = transform.position + new Vector3(-RayPositionOffset, collider.size.y / 2, 0);
+        RayPositionRightVertical = transform.position + new Vector3(RayPositionOffset, collider.size.y / 2, 0);
 
-        RayPositionCenterHorizontal = transform.position + new Vector3(transform.localScale.y / 2, 0, 0);
-        RayPositionHighHorizontal = transform.position + new Vector3(transform.localScale.y / 2, RayPositionOffset, 0);
-        RayPositionLowHorizontal = transform.position + new Vector3(transform.localScale.y / 2, -RayPositionOffset, 0);
+        RayPositionCenterHorizontal = transform.position + new Vector3(collider.size.y / 2, 0, 0);
+        RayPositionHighHorizontal = transform.position + new Vector3(collider.size.y / 2, RayPositionOffset, 0);
+        RayPositionLowHorizontal = transform.position + new Vector3(collider.size.y / 2, -RayPositionOffset, 0);
 
         // Send out rays
         CeilingHitsCenter = Physics2D.RaycastAll(RayPositionCenterVertical, Vector2.up, RayLength);
@@ -95,6 +109,7 @@ public class Kill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DeathControl();
+        if (!isDead)
+            DeathControl();
     }
 }
