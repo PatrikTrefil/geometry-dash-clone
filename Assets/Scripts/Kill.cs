@@ -28,7 +28,7 @@ public class Kill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RayPositionOffset = (transform.localScale.y / 2) - 0.1f;
+        RayPositionOffset = (transform.localScale.y / 2) - 0.2f;
     }
 
     void Death()
@@ -86,7 +86,7 @@ public class Kill : MonoBehaviour
 
         if (shouldDie(AllRaycastHits))
         {
-            Debug.Log("kill");
+            Debug.Log("kill wall");
             Death();
         }
 

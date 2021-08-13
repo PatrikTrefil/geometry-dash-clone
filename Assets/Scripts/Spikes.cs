@@ -14,7 +14,10 @@ public class Spikes : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")
+        {
+            Debug.Log("kill");
             SceneManager.LoadScene("Game");
+        }
 
     }
     // Update is called once per frame
