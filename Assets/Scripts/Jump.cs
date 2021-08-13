@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    public Vector2 jumpForce;
-    public float speed;
-    public float rotationSpeed;
-    public float fallMultiplier;
+    [SerializeField] int jumpForce;
+    [SerializeField] float speed;
+    [SerializeField] float rotationSpeed;
+    [SerializeField] float fallMultiplier;
     private Rigidbody2D rb;
-    [SerializeField] private float maxVelocity;
     //private Transform skin;
     private bool isGrounded = false;
 
@@ -41,7 +40,7 @@ public class Jump : MonoBehaviour
 
     void MakeJump()
     {
-        rb.AddForce(jumpForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     void JumpDetection()
@@ -50,12 +49,6 @@ public class Jump : MonoBehaviour
             MakeJump();
     }
 
-    void Movement()
-    {
-        //transform.Translate(Vector2.right * Time.deltaTime * speed, Space.World);
-        //rb.MovePosition((Vector2)transform.position + (Vector2.right * speed * Time.deltaTime));
-        rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
-    }
 
     //void ContinuousRotation()
     //{
@@ -95,7 +88,6 @@ public class Jump : MonoBehaviour
             IncreaseFallSpeed();
             //ContinuousRotation();
         }
-        Movement();
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity); // if we allowed more speed, the player would glitch through ground a bit and the raycasts would detect death
+        
     }
 }
