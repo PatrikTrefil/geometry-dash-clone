@@ -9,6 +9,8 @@ public class Jump : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float fallMultiplier;
+    [SerializeField] float interval;
+    float lastTime = 0;
     private Rigidbody2D rb;
     //private Transform skin;
     private bool isGrounded = false;
@@ -41,11 +43,12 @@ public class Jump : MonoBehaviour
     void MakeJump()
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        lastTime = Time.time;
     }
 
     void JumpDetection()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (isGrounded && Input.GetKey(KeyCode.UpArrow) && Time.time >= lastTime + interval)
             MakeJump();
     }
 
