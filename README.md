@@ -9,7 +9,9 @@ on the gameplay.
 
 ## Screenshots
 
-HACK
+![gameplay screenshot](./screenshots/2.png)
+
+More screenshots can be found in `./screenshots/`.
 
 ## Installation
 
