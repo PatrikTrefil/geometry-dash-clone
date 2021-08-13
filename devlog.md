@@ -19,7 +19,6 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 ## To-Do
 
 - figure out how to save and load maps (includes structure of classes for building blocks)
-- add desktop icon
 
 ### Potentional additions
 
@@ -27,6 +26,16 @@ https://www.youtube.com/watch?v=zc8ac_qUXQY
 - rolling ball form
 
 ## Log
+
+### 2021-08-13
+
+- finally managed to check for collision that kill player using *RayCasts*
+
+### 2021-08-12
+
+- improved UI
+- tried to improve player movement (unsuccessful)
+- added dekstop icon
 
 ### 2021-08-11
 

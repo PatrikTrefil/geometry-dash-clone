@@ -10,13 +10,13 @@ public class Jump : MonoBehaviour
     public float rotationSpeed;
     public float fallMultiplier;
     private Rigidbody2D rb;
-    private Transform skin;
+    //private Transform skin;
     private bool isGrounded = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        skin = GetComponentInChildren<Transform>();
+        //skin = GetComponentInChildren<Transform>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -24,7 +24,7 @@ public class Jump : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             isGrounded = true;
-            FinishRotation();
+            //FinishRotation();
             Debug.Log("landed");
         }
     }
@@ -56,22 +56,22 @@ public class Jump : MonoBehaviour
         rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
     }
 
-    void ContinuousRotation()
-    {
-        Vector3 direction = new Vector3(0, 0, 1);
-        skin.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
-    }
+    //void ContinuousRotation()
+    //{
+    //    Vector3 direction = new Vector3(0, 0, 1);
+    //    skin.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
+    //}
 
-    void FinishRotation()
-    {
-        Debug.Log(skin.transform.rotation.z); // ??
-        float rem = Math.Abs(skin.transform.rotation.z) % 90; // HACK abs
-        //Debug.Log(rem);
-        if (rem > 45)
-            skin.Rotate(new Vector3(0, 0, 1) * (90 - rem), Space.Self);
-        else
-            skin.Rotate(-1 * rem * new Vector3(0, 0, 1), Space.Self);
-    }
+    //void FinishRotation()
+    //{
+    //    Debug.Log(skin.transform.rotation.z); // ??
+    //    float rem = Math.Abs(skin.transform.rotation.z) % 90; // HACK abs
+    //    //Debug.Log(rem);
+    //    if (rem > 45)
+    //        skin.Rotate(new Vector3(0, 0, 1) * (90 - rem), Space.Self);
+    //    else
+    //        skin.Rotate(-1 * rem * new Vector3(0, 0, 1), Space.Self);
+    //}
 
     void IncreaseFallSpeed()
     {
@@ -92,7 +92,7 @@ public class Jump : MonoBehaviour
         if (!isGrounded)
         {
             IncreaseFallSpeed();
-            ContinuousRotation();
+            //ContinuousRotation();
         }
         Movement();
     }
