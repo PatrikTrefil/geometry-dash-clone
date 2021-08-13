@@ -10,6 +10,7 @@ public class Jump : MonoBehaviour
     public float rotationSpeed;
     public float fallMultiplier;
     private Rigidbody2D rb;
+    [SerializeField] private float maxVelocity;
     //private Transform skin;
     private bool isGrounded = false;
 
@@ -95,5 +96,6 @@ public class Jump : MonoBehaviour
             //ContinuousRotation();
         }
         Movement();
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity); // if we allowed more speed, the player would glitch through ground a bit and the raycasts would detect death
     }
 }
