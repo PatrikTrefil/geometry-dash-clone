@@ -41,5 +41,4 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: true
           title: "Development Build"
-          files: |
-            *.exe
+          files: build/${{ matrix.targetPlatform }}
