@@ -7,12 +7,7 @@ using UnityEngine.SceneManagement;
 public class Kill : MonoBehaviour
 {
     [SerializeField] private float RayLength;
-    [SerializeField] private AudioSource soundtrack;
-    [SerializeField] private GameObject restartMenu;
-    [SerializeField] private AudioClip clip;
     bool isDead = false;
-    AudioSource audioSource;
-    Animator animator;
     BoxCollider2D playerCollider;
     float rayPositionOffset;
 
@@ -40,18 +35,6 @@ public class Kill : MonoBehaviour
     {
         playerCollider = GetComponent<BoxCollider2D>();
         rayPositionOffset = (playerCollider.size.y / 2) - 0.2f;
-        animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    void Death()
-    {
-        isDead = true;
-        animator.Play("Death");
-        soundtrack.mute = true;
-        audioSource.PlayOneShot(clip);
-        restartMenu.SetActive(true);
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     bool ShouldDie(RaycastHit2D[][] AllRaycastHits)
@@ -104,7 +87,8 @@ public class Kill : MonoBehaviour
         if (ShouldDie(AllRaycastHits))
         {
             Debug.Log("killed by wall");
-            Death();
+            GetComponent<Death>().Die();
+            isDead = true;
         }
 
     }

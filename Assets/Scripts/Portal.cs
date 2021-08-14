@@ -6,24 +6,17 @@ public class Portal : MonoBehaviour
 {
     [SerializeField] bool jump;
     [SerializeField] bool plane;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    private void Start()
+    {
+        Debug.Assert(jump != plane); // make sure jumping and plane mode is not disabled/enabled at the same time
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Jump>().enabled = jump;
             collision.gameObject.GetComponent<Plane>().enabled = plane;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

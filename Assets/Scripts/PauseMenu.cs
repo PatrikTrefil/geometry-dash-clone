@@ -7,35 +7,26 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isGamePaused = false;
     [SerializeField] GameObject PauseMenuUI;
+    GameTime gameTime;
 
-    public void GoToMainMenu()
+    private void Start()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("Start");
+        gameTime = GetComponent<GameTime>();
     }
 
-    public void ResumeGame()
+    public void TogglePauseMenu(bool turnOn)
     {
-        PauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isGamePaused = false;
-        Debug.Log("resume");
-    }
-
-    void PauseGame()
-    {
-        PauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        isGamePaused = true;
-        Debug.Log("pause");
+        PauseMenuUI.SetActive(turnOn);
+        if (turnOn)
+            gameTime.PauseGame();
+        else
+            gameTime.ResumeGame();
+        isGamePaused = turnOn;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (isGamePaused)
-                ResumeGame();
-            else
-                PauseGame();
+            TogglePauseMenu(!isGamePaused);
     }
 }
