@@ -35,3 +35,8 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
+      - uses: elgohr/Github-Release-Action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+        with:
+          args: Automatic release
