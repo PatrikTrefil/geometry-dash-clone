@@ -35,7 +35,3 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
-      - uses: ncipollo/release-action@v1
-        with:
-          artifacts: "Build-StandaloneWindows"
-          token: ${{ secrets.GITHUB_TOKEN }}
