@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class VolumeControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Slider slider;
-    public AudioMixer mixer;
+    [SerializeField] Slider slider;
+    [SerializeField] AudioMixer mixer;
     void Start()
     {
+        mixer.GetFloat("MasterVolume", out float currVolume);
+        slider.value = currVolume;
         slider.onValueChanged.AddListener((v) =>
         {
             if (v == slider.minValue)
@@ -20,11 +21,5 @@ public class VolumeControl : MonoBehaviour
 
             Debug.Log($"Volume: {v}");
         });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
