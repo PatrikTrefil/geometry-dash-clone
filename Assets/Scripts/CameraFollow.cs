@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] float smoothFactor;
     [SerializeField] Vector3 offset; // camera offset relative to player
 
-    void smoothCameraMovement()
+    void SmoothCameraMovement()
     {
         Vector3 targetCameraPosition = targetObject.position + offset;
         float distanceBetween = (targetCameraPosition - transform.position).magnitude;
@@ -18,6 +18,6 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        smoothCameraMovement();
+        SmoothCameraMovement();
     }
 }
