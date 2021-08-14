@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Start");
     }
+
     public void ResumeGame()
     {
         PauseMenuUI.SetActive(false);
@@ -28,14 +29,13 @@ public class PauseMenu : MonoBehaviour
         isGamePaused = true;
         Debug.Log("pause");
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             if (isGamePaused)
                 ResumeGame();
             else
                 PauseGame();
-        }
     }
 }

@@ -10,30 +10,30 @@ public class Jump : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float fallMultiplier;
     [SerializeField] float interval;
-    float lastTime = 0;
-    private Rigidbody2D rb;
-    //private Transform skin;
-    private bool isGrounded = false;
+    float lastTime = 0; 
+    // last time of jump is noted with every jump,
+    // because we want to block jumping for the next x seconds,
+    // because it takes time before the player leaves the ground
+    Rigidbody2D rb;
+    bool isGrounded = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //skin = GetComponentInChildren<Transform>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Block")
+        if (collision.gameObject.CompareTag("Block"))
         {
             isGrounded = true;
-            //FinishRotation();
             Debug.Log("landed");
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Block")
+        if (collision.gameObject.CompareTag("Block"))
         {
             isGrounded = false;
             Debug.Log("airborn");
@@ -43,32 +43,16 @@ public class Jump : MonoBehaviour
     void MakeJump()
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        lastTime = Time.time;
     }
 
     void JumpDetection()
     {
         if (isGrounded && Input.GetKey(KeyCode.UpArrow) && Time.time >= lastTime + interval)
+        {
+            lastTime = Time.time;
             MakeJump();
+        }
     }
-
-
-    //void ContinuousRotation()
-    //{
-    //    Vector3 direction = new Vector3(0, 0, 1);
-    //    skin.Rotate(-1 * Time.deltaTime * rotationSpeed * direction);
-    //}
-
-    //void FinishRotation()
-    //{
-    //    Debug.Log(skin.transform.rotation.z); // ??
-    //    float rem = Math.Abs(skin.transform.rotation.z) % 90; // HACK abs
-    //    //Debug.Log(rem);
-    //    if (rem > 45)
-    //        skin.Rotate(new Vector3(0, 0, 1) * (90 - rem), Space.Self);
-    //    else
-    //        skin.Rotate(-1 * rem * new Vector3(0, 0, 1), Space.Self);
-    //}
 
     void IncreaseFallSpeed()
     {
@@ -87,10 +71,6 @@ public class Jump : MonoBehaviour
     private void FixedUpdate()
     {
         if (!isGrounded)
-        {
             IncreaseFallSpeed();
-            //ContinuousRotation();
-        }
-        
     }
 }

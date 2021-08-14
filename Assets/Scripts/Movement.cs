@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    Rigidbody2D rb;
     [SerializeField] private float speed;
     [SerializeField] private float maxVelocity;
 
@@ -21,17 +21,15 @@ public class Movement : MonoBehaviour
         rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
     }
 
-
-
-    // Update is called once per frame
-    void Update()
+    void LimitSpeed()
     {
-        
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity);
+        // if we allowed more speed, the player would glitch through ground after falling a bit and the raycasts would detect death
     }
 
     private void FixedUpdate()
     {
         Move();
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxVelocity); // if we allowed more speed, the player would glitch through ground a bit and the raycasts would detect death
+        LimitSpeed();
     }
 }
