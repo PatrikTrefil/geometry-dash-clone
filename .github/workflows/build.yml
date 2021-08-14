@@ -35,10 +35,7 @@ jobs:
         with:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: ncipollo/release-action@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: build/${{ matrix.targetPlatform }}
+          artifacts: "Build-StandaloneWindows"
+          token: ${{ secrets.GITHUB_TOKEN }}
